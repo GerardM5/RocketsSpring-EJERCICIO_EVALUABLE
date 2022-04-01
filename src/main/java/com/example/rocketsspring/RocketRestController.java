@@ -20,6 +20,11 @@ public class RocketRestController {
         return service.createRocket(rocket);
     }
 
+    @PostMapping("/{id}/movement")
+    public Rocket moveRocket(@PathVariable String rocketId, @RequestBody Movement movement){
+        return service.moveRocket(rocketId,movement);
+    }
+
     @PutMapping("/{rocketId}")
     public Rocket updateRocketId(@PathVariable String rocketId, @RequestBody String newRocketId){
         return service.updateRocketName(rocketId, newRocketId);

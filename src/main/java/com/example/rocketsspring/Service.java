@@ -31,11 +31,26 @@ public class Service {
         return rocketList;
     }
 
+    public Rocket moveRocket(String rocketId, Movement movement){
+        Rocket rocket = rocketRepository.findById(rocketId).get();
+
+        for (int i = 0; i < movement.getTimes(); i++) {
+            if(movement.getMovementType().equals(Movement.ACCELERATE)){
+                rocket.speedUp();
+            }else if(movement.getMovementType().equals(Movement.BRAKE)){
+                rocket.speedDown();
+            }
+        }
+
+        propellerRepository.saveAll(rocket.getPropellers());
+        return rocket;
+    }
+
     public void deleteRocketList() {
         rocketRepository.deleteAll();
     }
 
-    public Rocket movementPropellers(String toDO, String rocketId) throws Exception {
+    public Rocket movementRocket(String toDO, String rocketId) throws Exception {
 
         Rocket rocket = findRocket(rocketId);
 
@@ -72,7 +87,7 @@ public class Service {
     public Propeller createPropeller(String rocketId, Propeller propeller) throws Exception {
         Rocket rocket = findRocket(rocketId);
         propeller = rocket.createPropeller(propeller);
-        findRocket(rocketId).createPropeller(propeller);
+        propellerRepository.save(propeller);
         return propeller;
     }
 

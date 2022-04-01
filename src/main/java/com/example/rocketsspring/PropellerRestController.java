@@ -19,7 +19,7 @@ public class PropellerRestController {
         return service.createPropeller(rocketId, propeller);
     }
     @PutMapping("/{propellerId}")
-    public Propeller updatePropeller(@PathVariable String propellerId, @RequestBody Propeller propeller){
+    public Propeller updatePropeller(@PathVariable String propellerId, @RequestBody Propeller propeller, @PathVariable String rocketId){
         return service.updatePropeller(propellerId,propeller);
     }
 
@@ -29,8 +29,8 @@ public class PropellerRestController {
     }
 
     @GetMapping("/{propellerId}")
-    public Propeller getPropeller(@PathVariable String propellerId){
-        return getPropeller(propellerId);
+    public Propeller getPropeller(@PathVariable String propellerId, @PathVariable String rocketId){
+        return service.getPropeller(propellerId);
     }
 
     @DeleteMapping
@@ -39,7 +39,7 @@ public class PropellerRestController {
     }
 
     @DeleteMapping("/{propellerId}")
-    public void deletePropeller(@PathVariable String propellerId){
+    public void deletePropeller(@PathVariable String propellerId, @PathVariable String rocketId){
         service.deletePropeller(propellerId);
     }
 
