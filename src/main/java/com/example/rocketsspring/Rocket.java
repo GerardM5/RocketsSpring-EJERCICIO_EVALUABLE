@@ -1,5 +1,7 @@
 package com.example.rocketsspring;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -7,22 +9,25 @@ import javax.persistence.OneToMany;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-@Entity(name = "users")
+
+
+@Entity(name = "rockets")
 public class Rocket {
     @Id
     private String id = UUID.randomUUID().toString();
-    private int numPropellers;
-    @OneToMany(mappedBy = "propeller")
+    private String name;
+
+    @OneToMany(mappedBy = "rocket")
+    @JsonManagedReference
     private List<Propeller> propellers = new ArrayList<>();
 
     public Rocket(){
 
     }
 
-    public Rocket(String id, int numPropellers) throws Exception {
-        checkId(id);
-        this.id = id;
-        this.numPropellers = numPropellers;
+    public Rocket(String name){
+        this.name = name;
+
     }
 
     public Propeller createPropeller(Propeller propeller) throws Exception {
@@ -36,18 +41,21 @@ public class Rocket {
         if (id.length() != 8) throw new Exception("ID incorrecto");
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getNumPropellers() {
 
-        return numPropellers;
+        return propellers.size();
     }
 
     public String getId() {
         return id;
-    }
-
-    public void setNumPropellers(int numPropellers) {
-        this.numPropellers = numPropellers;
     }
 
     public List<Propeller> getPropellers() {
@@ -82,12 +90,4 @@ public class Rocket {
         }
     }
 
-    @Override
-    public String toString() {
-        return "Rocket{" +
-                "id='" + id + '\'' +
-                ", currentPower=" + numPropellers +
-                ", propellers=" + propellers +
-                '}';
-    }
 }

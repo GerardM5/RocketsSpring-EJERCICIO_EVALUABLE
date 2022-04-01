@@ -22,7 +22,7 @@ public class RocketRestController {
 
     @PutMapping("/{rocketId}")
     public Rocket updateRocketId(@PathVariable String rocketId, @RequestBody String newRocketId){
-        return service.updateRocketId(rocketId, newRocketId);
+        return service.updateRocketName(rocketId, newRocketId);
     }
 
     @GetMapping

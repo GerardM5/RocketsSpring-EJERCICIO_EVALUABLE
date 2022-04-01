@@ -35,7 +35,7 @@ public class Service {
         rocketRepository.deleteAll();
     }
 
-    public Rocket actionPropellers(String toDO, String rocketId) throws Exception {
+    public Rocket movementPropellers(String toDO, String rocketId) throws Exception {
 
         Rocket rocket = findRocket(rocketId);
 
@@ -50,8 +50,8 @@ public class Service {
         return rocket;
     }
 
-    public Rocket updateRocketId(String rocketId, String newRocketId) {
-        findRocket(rocketId).setId(newRocketId);
+    public Rocket updateRocketName(String rocketId, String newRocketId) {
+        findRocket(rocketId).setName(newRocketId);
         return findRocket(rocketId);
     }
 

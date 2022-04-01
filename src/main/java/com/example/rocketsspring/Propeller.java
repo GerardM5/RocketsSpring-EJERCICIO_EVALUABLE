@@ -1,5 +1,6 @@
 package com.example.rocketsspring;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -17,8 +18,7 @@ public class Propeller {
     private int currentPower;
 
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "rocket_id")
+    @JsonBackReference
     private Rocket rocket;
 
     public Propeller() {
